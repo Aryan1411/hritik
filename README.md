@@ -1,32 +1,47 @@
 # Hritik Sharma — Portfolio
 
-MIT Licensed single‑page portfolio for Hritik Sharma, an Aerospace Engineer and Astronaut. It features an aesthetic, performant space scene with animated rockets launching and orbiting planets, alongside professional information, skills, experience, and contact options.
+MIT Licensed single‑page portfolio for Hritik Sharma, an Aerospace Engineer and Astronaut. It features an aesthetic, performant background with animated rockets flying and orbiting, plus a theme toggle for Night and Day.
 
 ## Overview
-- Elegant, responsive, and fast: loads without external assets.
-- Interactive space background:
-  - Twinkling stars and gradient planets (one with a ring).
-  - Rockets periodically launch from the bottom and others fly in orbit around planets.
-  - Press “L” or click “Launch Rocket” to spawn a new launch.
+- Elegant, responsive, and fast: no external assets or build steps.
+- Interactive animated background:
+  - Night: twinkling stars, gradient planets (one with a ring), orbiting rockets, and periodic rocket launches with exhaust.
+  - Day: blue sky gradient with a glowing sun and drifting clouds; satellites/rockets still fly.
+  - Launch your own rocket via the “Launch Rocket” button or “L” key.
+- Theme toggle:
+  - Switch between Night and Day. Accessible button with clear label and state, and preference persisted in localStorage.
 - Content sections:
-  - Hero with role, summary, and quick actions.
-  - About, Experience, Core Skills, Missions/Projects, and Contact with a simple form.
-- Accessibility:
-  - Respects “prefers-reduced-motion” (disables canvas animations for users who prefer less motion).
+  - Hero, About, Experience, Core Skills, Missions/Projects, and Contact (demo form).
+- Accessibility and performance:
+  - Respects “prefers-reduced-motion” (pauses animation and renders a static scene).
+  - System fonts, no network calls, scales to device pixel ratio for crisp rendering.
 
 ## Setup
-No build steps are required.
+No build tools required.
 
-- Option 1: Double-click index.html to open in your browser.
-- Option 2: Serve locally for best performance:
+- Option 1: Double‑click index.html to open in your browser.
+- Option 2: Serve locally (recommended for best canvas performance):
   - Python: python3 -m http.server 8000
   - Node (serve): npx serve
-  - Open http://localhost:8000 (or the port your server prints).
+  - Open http://localhost:8000 (or the port printed by your server).
 
 ## Usage
-- Navigate via the sticky header to jump between sections.
-- Click “Launch Rocket” or press the L key to launch an animated rocket.
-- Use the contact form to submit a message (demo alert). Replace the mailto and form handling as needed.
+- Use the sticky header to jump between sections.
+- Press “L” or click “Launch Rocket” to spawn a rocket with animated exhaust.
+- Click the “Night/Day” toggle to switch themes. Your choice is saved for the next visit.
+- Fill the contact form and click Send to see a demo alert (replace with your backend as needed).
+
+## Improvements in Round 2
+- Added continuous background rocket animation:
+  - Periodic rocket launches from the horizon with exhaust particles.
+  - Orbiting rockets around celestial bodies.
+  - Device‑pixel‑ratio aware rendering for crisp visuals.
+- Added theme toggle button for Night/Day:
+  - Night theme with stars and planets; Day theme with a sun and drifting clouds.
+  - Accessible control (aria‑pressed, descriptive label) and persistence via localStorage.
+- Enhanced accessibility and performance:
+  - Respects prefers‑reduced‑motion by disabling animation and rendering a static scene.
+  - Kept everything inline and dependency‑free for faster loads.
 
 ## License
 MIT License
