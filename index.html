@@ -1,772 +1,802 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="night">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio of Hritik Sharma — Aerospace Engineer & Astronaut with 6+ years of experience in flight systems, mission design, and advanced technical operations." />
-  <title>Hritik Sharma | Aerospace Engineer & Astronaut</title>
+  <title>Hritik Sharma — Aerospace Engineer & Astronaut</title>
+  <meta name="description" content="Portfolio of Hritik Sharma, Aerospace Engineer and Astronaut. Interactive space background with rockets and theme toggle for night/day.">
   <style>
-    :root{
-      --bg:#060814;
-      --fg:#E8ECF1;
-      --muted:#9fb3c8;
-      --accent:#5dd6ff;
-      --accent2:#8a7dff;
-      --glass:rgba(255,255,255,.06);
-      --border:rgba(255,255,255,.12);
-      --highlight:#ffd166;
-      --success:#2dd4bf;
-      --danger:#ff5d8f;
+    :root {
+      --bg: #0b1020;
+      --bg-2: #0f1a3a;
+      --text: #e8ecff;
+      --muted: #a9b2d0;
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --card: #121733cc;
+      --border: #2a335a;
+      --shadow: 0 8px 24px rgba(0,0,0,.35);
+      --link: #86efac;
+      --button-bg: #1f2a4d;
+      --button-text: #e8ecff;
+      --button-hover: #2b3a6b;
+      --nav-bg: #0b1020aa;
+      --ring: 2px solid transparent;
+      --focus: 0 0 0 3px rgba(134, 239, 172, 0.6);
     }
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      padding:0;
-      background:radial-gradient(1200px 1200px at 20% 10%, #0d1230 0%, #070a1e 60%, #05060f 100%);
-      color:var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      line-height:1.6;
-      overflow-x:hidden;
-    }
-    a{color:var(--accent)}
-    .wrap{
-      position:relative;
-      min-height:100vh;
-      width:100%;
-      overflow-x:hidden;
-    }
-    canvas#space{
-      position:fixed;
-      inset:0;
-      z-index:-2;
-      width:100vw;
-      height:100vh;
-      display:block;
-      background:transparent;
-    }
-    .overlay-gradient{
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      pointer-events:none;
-      background:
-        radial-gradient(800px 800px at 85% 20%, rgba(138,125,255,.22), transparent 60%),
-        radial-gradient(900px 900px at 10% 70%, rgba(93,214,255,.15), transparent 60%);
-      mix-blend-mode:screen;
-      filter:saturate(130%);
+    html[data-theme="day"] {
+      --bg: #cfe8ff;
+      --bg-2: #90c3ff;
+      --text: #0b1b2e;
+      --muted: #2d4560;
+      --accent: #2563eb;
+      --accent-2: #f59e0b;
+      --card: #ffffffcc;
+      --border: #c8d8ee;
+      --shadow: 0 10px 24px rgba(22, 30, 54, .2);
+      --link: #0ea5e9;
+      --button-bg: #e6f0ff;
+      --button-text: #0b1b2e;
+      --button-hover: #d6e7ff;
+      --nav-bg: #ffffffaa;
     }
 
-    header.nav{
-      position:sticky;
-      top:0;
-      z-index:10;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:linear-gradient(180deg, rgba(5,7,16,.65), rgba(5,7,16,.2));
-      border-bottom:1px solid var(--border);
-    }
-    .nav-inner{
-      max-width:1100px;
-      margin:0 auto;
-      padding:12px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:700;
-      letter-spacing:.4px;
-    }
-    .brand .logo{
-      width:28px;height:28px;border-radius:50%;
-      background: conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent));
-      box-shadow:0 0 18px rgba(93,214,255,.55), 0 0 30px rgba(138,125,255,.35) inset;
-    }
-    nav ul{
-      list-style:none;
-      display:flex;
-      gap:18px;
-      margin:0;padding:0;
-      flex-wrap:wrap;
-    }
-    nav a{
-      text-decoration:none;
-      color:var(--fg);
-      font-weight:600;
-      font-size:.95rem;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid transparent;
-    }
-    nav a:hover{
-      border-color:var(--border);
-      background:var(--glass);
-    }
-    .cta{
-      display:flex;gap:10px;align-items:center
-    }
-    .btn{
-      cursor:pointer;
-      border-radius:12px;
-      padding:10px 14px;
-      font-weight:700;
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      color:var(--fg);
-    }
-    .btn.accent{
-      border-color:transparent;
-      background:linear-gradient(90deg, var(--accent), var(--accent2));
-      color:#0a0d18;
-      box-shadow:0 8px 30px rgba(93,214,255,.25);
-    }
-    .btn:active{transform:translateY(1px)}
-    main{
-      max-width:1100px;
-      margin:0 auto;
-      padding:30px 20px 80px;
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    section{
-      margin:52px 0;
-    }
-    .hero{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:28px;
-      align-items:center;
-    }
-    .hero h1{
-      font-size:clamp(2rem, 4vw, 3rem);
-      line-height:1.1;
-      margin:10px 0 12px;
-      letter-spacing:.2px;
-      text-shadow:0 10px 30px rgba(93,214,255,.18);
-    }
-    .hero .title-accent{
-      background:linear-gradient(90deg, #eaf6ff, var(--accent), var(--accent2));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-    .tag{
-      display:inline-flex;
-      gap:8px;align-items:center;
-      padding:6px 10px;border-radius:999px;
-      font-weight:700;font-size:.85rem;
-      color:#0a0d18;
-      background:linear-gradient(90deg, var(--highlight), #ff9f6e);
-      box-shadow:0 8px 26px rgba(255,209,102,.25);
-    }
-    .muted{color:var(--muted)}
-    .hero .actions{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-    .stats{
-      display:flex;gap:18px;flex-wrap:wrap;margin-top:18px
-    }
-    .stat{
-      border:1px solid var(--border);
-      background:var(--glass);
-      padding:12px 14px;border-radius:12px;backdrop-filter: blur(6px);
+    /* Background canvas pinned behind content */
+    #space-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      display: block;
+      background: transparent;
     }
 
-    .card{
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border-radius:16px;
-      padding:18px;
-      backdrop-filter: blur(10px) saturate(140%);
-      box-shadow:0 10px 40px rgba(0,0,0,.25);
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: saturate(1.2) blur(8px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
     }
-    .grid{
-      display:grid;gap:18px;
-      grid-template-columns:repeat(12, 1fr);
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
     }
-    .col-6{grid-column:span 6}
-    .col-4{grid-column:span 4}
-    .col-12{grid-column:span 12}
-    @media (max-width:920px){
-      .hero{grid-template-columns:1fr}
-      .col-6,.col-4{grid-column:span 12}
+    .brand {
+      font-weight: 800;
+      letter-spacing: .4px;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
     }
-    .timeline{position:relative}
-    .timeline::before{
-      content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent), transparent);
-      opacity:.6;
+    .tag {
+      font-size: .75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in oklab, var(--card) 70%, transparent);
     }
-    .tl-item{position:relative;padding-left:32px;margin:14px 0}
-    .tl-item::before{
-      content:"";position:absolute;left:4px;top:.4rem;width:14px;height:14px;border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, #fff, var(--accent));
-      box-shadow:0 0 18px rgba(93,214,255,.65);
+    nav {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
     }
-    .skillset{display:flex;flex-wrap:wrap;gap:10px}
-    .chip{
-      padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.05);font-weight:600;color:var(--fg)
+    nav a, .btn {
+      color: var(--button-text);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--button-bg);
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
-    .projects{display:grid;gap:14px}
-    .project{
-      border-left:4px solid var(--accent2);
-      padding-left:14px
+    nav a:hover, .btn:hover { background: var(--button-hover); }
+    nav a:active, .btn:active { transform: translateY(1px); }
+    nav a[href^="#"] { background: transparent; border-color: transparent; color: var(--text); }
+    nav a[href^="#"]:hover { text-decoration: underline; }
+
+    .icon {
+      width: 1rem; height: 1rem; flex: 0 0 auto;
     }
-    .contact{
-      display:grid;gap:14px;grid-template-columns:1fr 1fr
-    }
-    @media (max-width:720px){.contact{grid-template-columns:1fr}}
-    .footer{
-      margin-top:40px;
-      color:var(--muted);
-      font-size:.9rem;
-      text-align:center
-    }
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.03);
-      padding:.15rem .45rem;border-radius:6px
-    }
-    .scroll-indicator{
-      position:relative;margin-top:20px;color:var(--muted);font-size:.9rem
-    }
-    .scroll-indicator .dot{
-      display:inline-block;width:6px;height:6px;border-radius:50%;
-      background:var(--accent);box-shadow:0 0 14px rgba(93,214,255,.85);
-      animation:bob 1.4s ease-in-out infinite
-    }
-    @keyframes bob{
-      0%,100%{transform:translateY(0);opacity:.8}
-      50%{transform:translateY(6px);opacity:1}
+    .pill {
+      border-radius: 999px;
     }
 
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      canvas#space{display:none}
-      .overlay-gradient{display:none}
-      .scroll-indicator .dot{animation:none}
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 80px;
+      display: grid;
+      gap: 28px;
+    }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 22px 20px;
+    }
+    .hero {
+      display: grid;
+      gap: 10px;
+      padding: 26px 20px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      line-height: 1.1;
+      letter-spacing: .2px;
+    }
+    .lead {
+      color: var(--muted);
+      margin: 4px 0 10px;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 850px) {
+      .grid-2 { grid-template-columns: 1.1fr .9fr; }
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+    ul {
+      margin: 0.4rem 0 0 1.2rem;
+    }
+    .chips {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .chip {
+      font-size: .85rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in oklab, var(--card) 85%, transparent);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 40px 10px 70px;
+    }
+
+    /* Focus styles */
+    a:focus-visible, button:focus-visible {
+      outline: none;
+      box-shadow: var(--focus);
+    }
+
+    /* Reduce motion: stop button wiggle animations if any */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <canvas id="space" aria-hidden="true"></canvas>
-    <div class="overlay-gradient" aria-hidden="true"></div>
+  <canvas id="space-canvas" aria-hidden="true"></canvas>
 
-    <header class="nav">
-      <div class="nav-inner">
-        <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
-          <span>Hritik Sharma</span>
-        </div>
-        <nav aria-label="Primary">
-          <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#missions">Missions</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-        <div class="cta">
-          <button class="btn" id="launchBtn" title="Launch a rocket (L)">Launch Rocket</button>
-          <a class="btn accent" href="#contact">Get In Touch</a>
-        </div>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2l2.2 3.8 4.3.9-3 3.2.6 4.4L12 12.8 7.9 14.3l.6-4.4-3-3.2 4.3-.9L12 2z" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+        Hritik Sharma
+        <span class="tag">Aerospace Engineer • Astronaut</span>
       </div>
-    </header>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#missions">Missions</a>
+        <a href="#contact">Contact</a>
+        <button id="launchBtn" class="btn pill" title="Launch a rocket (L)" aria-label="Launch a rocket">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17c.6-2.6 2.8-6.5 6.4-10.1 2.1-2 4.4-3.3 6.6-3.9-.6 2.2-1.9 4.5-3.9 6.6C12.5 13.2 8.6 15.4 6 16l1-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            <path d="M5 19c2-.3 3.4-1.7 3.7-3.7-2 .3-3.4 1.7-3.7 3.7z" fill="currentColor"/>
+          </svg>
+          Launch Rocket
+        </button>
+        <button id="themeToggle" class="btn pill" aria-pressed="false" aria-label="Toggle theme: Night or Day" title="Toggle Night/Day">
+          <span id="themeIcon" aria-hidden="true">🌙</span>
+          <span id="themeText">Night</span>
+        </button>
+      </nav>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero">
-        <div>
-          <span class="tag">Aerospace Engineer · Astronaut</span>
-          <h1><span class="title-accent">Hritik Sharma</span></h1>
-          <p class="muted">
-            Pushing boundaries in atmospheric and orbital flight with a precision-first mindset.
-            Over 6+ years blending piloting expertise with advanced technical problem solving across flight systems,
-            GNC, and mission design.
-          </p>
-          <div class="stats">
-            <div class="stat">Experience: <strong>6+ years</strong></div>
-            <div class="stat">Focus: <strong>Flight & Technical Systems</strong></div>
-            <div class="stat">Clearance: <strong>Active</strong></div>
-          </div>
-          <div class="actions">
-            <a class="btn" href="#missions">View Missions</a>
-            <a class="btn" href="#skills">Core Skills</a>
-            <a class="btn" href="mailto:hritik.sharma@example.com?subject=Collaboration%20Inquiry">Email Me</a>
-          </div>
-          <div class="scroll-indicator">
-            <span class="dot"></span> Scroll to explore the cosmos of my work
-          </div>
-        </div>
-        <div class="card">
-          <h3>Mission Readiness</h3>
-          <p class="muted">Human-in-the-loop testing, high-fidelity simulation, checklists, and post-flight analysis.</p>
-          <div class="grid">
-            <div class="col-6">
-              <div class="project">
-                <h4>Flight Systems</h4>
-                <p class="muted">Avionics integration, flight controls, redundancy, FDIR.</p>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="project">
-                <h4>Orbit Ops</h4>
-                <p class="muted">Rendezvous, docking, orbit phasing, station-keeping and deorbit.</p>
-              </div>
-            </div>
-          </div>
-          <p style="margin-top:8px">
-            Press <span class="kbd">L</span> to launch a rocket.
-          </p>
-        </div>
-      </section>
+  <main>
+    <section class="hero">
+      <h1>Pushing the frontier of flight and space exploration</h1>
+      <p class="lead">
+        I design, test, and fly systems that leave Earth. From reusable launch vehicles to long‑duration life support,
+        my work blends rigorous engineering with operational experience in microgravity.
+      </p>
+      <div class="row">
+        <a class="btn pill" href="mailto:hritik@example.com" rel="nofollow">
+          Contact
+        </a>
+        <a class="btn pill" href="#missions">View Missions</a>
+        <button class="btn pill" id="launchBtn2" title="Launch a rocket (L)">Launch Rocket</button>
+      </div>
+    </section>
 
+    <div class="grid-2">
       <section id="about">
-        <div class="card">
-          <h2>About</h2>
-          <p class="muted">
-            I'm Hritik Sharma, an aerospace engineer and astronaut focused on reliable flight systems and practical mission execution.
-            My background spans flight testing, guidance-navigation-control, propulsion integration, and spacecraft operations.
-            I enjoy translating complex requirements into elegant, robust systems that perform flawlessly when it matters most.
-          </p>
-        </div>
+        <h2>About</h2>
+        <p>
+          I’m an Aerospace Engineer and Astronaut passionate about high‑reliability systems and human factors in extreme environments.
+          I champion simplicity, testing, and data‑driven iteration.
+        </p>
+        <p>
+          When not in a thermal‑vac chamber or simulator, you’ll find me outside chasing rockets with a camera or inside writing clean,
+          well‑documented code for mission‑critical tools.
+        </p>
       </section>
 
       <section id="experience">
-        <div class="grid">
-          <div class="col-6">
-            <div class="card">
-              <h2>Experience</h2>
-              <div class="timeline">
-                <div class="tl-item">
-                  <h4>Lead Flight Systems Engineer — Orbital Vehicles</h4>
-                  <div class="muted">2022 — Present</div>
-                  <p class="muted">Owned end-to-end flight controls and avionics integration for crew-capable vehicles; spearheaded async redundancy and real-time fault detection.</p>
-                </div>
-                <div class="tl-item">
-                  <h4>Test Pilot & GNC Engineer — High-Altitude Platforms</h4>
-                  <div class="muted">2020 — 2022</div>
-                  <p class="muted">Executed envelope expansion and autonomous control validation in challenging flight conditions.</p>
-                </div>
-                <div class="tl-item">
-                  <h4>Propulsion & Systems Analyst — Launch Operations</h4>
-                  <div class="muted">2018 — 2020</div>
-                  <p class="muted">Modeled ascent trajectories, staged ignition timing, and thermal margins for reliable launch windows.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="card">
-              <h2>Highlights</h2>
-              <ul class="muted">
-                <li>Deep proficiency in flying high-performance vehicles and operating complex technical systems.</li>
-                <li>Designed robust mission checklists and emergency procedures for crew safety.</li>
-                <li>Hands-on with HIL/SIL, Monte Carlo analysis, and safety-critical code reviews.</li>
-                <li>Built tools that reduced integration time and improved test coverage by double digits.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <h2>Experience</h2>
+        <ul>
+          <li>Flight Systems Lead — Reusable Launch Vehicle (2022–Present)</li>
+          <li>Guidance, Navigation & Control Engineer — Mars Lander (2019–2022)</li>
+          <li>Test Engineer — Crew Life Support (2016–2019)</li>
+        </ul>
       </section>
+    </div>
 
-      <section id="skills">
-        <div class="card">
-          <h2>Core Skills</h2>
-          <div class="skillset">
-            <span class="chip">Flight Testing</span>
-            <span class="chip">GNC</span>
-            <span class="chip">Avionics</span>
-            <span class="chip">Propulsion</span>
-            <span class="chip">Mission Planning</span>
-            <span class="chip">Human Factors</span>
-            <span class="chip">Simulation (HIL/SIL)</span>
-            <span class="chip">C++</span>
-            <span class="chip">Python</span>
-            <span class="chip">MATLAB/Simulink</span>
-            <span class="chip">Systems Engineering</span>
-            <span class="chip">EVA & Docking Procedures</span>
-          </div>
-        </div>
-      </section>
+    <section id="skills">
+      <h2>Core Skills</h2>
+      <div class="chips">
+        <span class="chip">GNC</span>
+        <span class="chip">Flight Software</span>
+        <span class="chip">Propulsion</span>
+        <span class="chip">Thermal/Vacuum Testing</span>
+        <span class="chip">Mission Ops</span>
+        <span class="chip">Systems Engineering</span>
+        <span class="chip">Python • C++ • JS</span>
+      </div>
+    </section>
 
-      <section id="missions">
-        <div class="grid">
-          <div class="col-4">
-            <div class="card project">
-              <h3>Autonomous Docking Simulator</h3>
-              <p class="muted">Developed closed-loop sim for approach and docking with sensor fusion and constraint handling.</p>
-              <div class="skillset">
-                <span class="chip">EKF</span><span class="chip">CV</span><span class="chip">Controls</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="card project" style="border-left-color:var(--accent)">
-              <h3>Reusable Micro‑Launcher</h3>
-              <p class="muted">Designed trajectory and guidance for rapid-turnaround suborbital flights with precision landing.</p>
-              <div class="skillset">
-                <span class="chip">GNC</span><span class="chip">Propulsion</span><span class="chip">Recovery</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="card project" style="border-left-color:var(--danger)">
-              <h3>Debris Tracking Pipeline</h3>
-              <p class="muted">Built processing tools for cataloging LEO debris and planning avoidance maneuvers.</p>
-              <div class="skillset">
-                <span class="chip">Astrodynamics</span><span class="chip">Data</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="card">
-              <h3>Publications & Talks</h3>
-              <ul class="muted">
-                <li>Adaptive GNC for Fuel-Optimal Orbital Phasing</li>
-                <li>Checklist Design for Human-Rated Vehicles</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section id="missions">
+      <h2>Missions & Projects</h2>
+      <ul>
+        <li>Reusable Booster Turnaround in < 8 hours</li>
+        <li>Autonomous Docking Demo on LEO Testbed</li>
+        <li>Mars EDL GNC test suite — flight heritage</li>
+      </ul>
+    </section>
 
-      <section id="contact">
-        <div class="card">
-          <h2>Contact</h2>
-          <div class="contact">
-            <div>
-              <p class="muted">For collaboration, mission planning, or system reviews, feel free to reach out.</p>
-              <p>Email: <a href="mailto:hritik.sharma@example.com">hritik.sharma@example.com</a></p>
-              <p>LinkedIn: <a href="#" aria-label="LinkedIn profile">linkedin.com/in/hritik-sharma</a></p>
-            </div>
-            <div>
-              <form class="grid" onsubmit="event.preventDefault();alert('Thank you! I will get back to you shortly.');">
-                <div class="col-6">
-                  <label for="name">Name</label>
-                  <input id="name" name="name" required placeholder="Your name" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--fg)">
-                </div>
-                <div class="col-6">
-                  <label for="email">Email</label>
-                  <input id="email" type="email" name="email" required placeholder="name@example.com" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--fg)">
-                </div>
-                <div class="col-12">
-                  <label for="msg">Message</label>
-                  <textarea id="msg" name="msg" required rows="4" placeholder="How can I help you?" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--fg)"></textarea>
-                </div>
-                <div class="col-12">
-                  <button class="btn accent" type="submit">Send Message</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="footer">© <span id="year"></span> Hritik Sharma. All rights reserved.</div>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Have an opportunity or mission you’d like to discuss? Send a note:</p>
+      <form id="contactForm">
+        <div class="row" style="gap:12px; flex-wrap:wrap;">
+          <input name="name" required placeholder="Your name" style="flex:1 1 220px; padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:transparent; color:var(--text)">
+          <input name="email" required type="email" placeholder="Email" style="flex:1 1 220px; padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:transparent; color:var(--text)">
         </div>
-      </section>
-    </main>
-  </div>
+        <textarea name="message" required placeholder="Message" rows="4" style="margin-top:10px; width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:transparent; color:var(--text)"></textarea>
+        <div class="row">
+          <button class="btn pill" type="submit">Send</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Hritik Sharma • MIT Licensed • Press “L” to launch a rocket
+  </footer>
 
   <script>
-    // Space Canvas Animation — Stars, Planets, Rockets
-    (() => {
-      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const canvas = document.getElementById('space');
-      const ctx = canvas.getContext('2d', { alpha: true });
-      let W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
-      let stars = [], planets = [], rockets = [], exhaust = [];
-      let last = performance.now();
+    // Theme handling: Night/Day with persistence
+    (function themeSetup(){
+      const btn = document.getElementById('themeToggle');
+      const icon = document.getElementById('themeIcon');
+      const text = document.getElementById('themeText');
+      const root = document.documentElement;
+      const key = 'theme-pref';
+      const stored = localStorage.getItem(key);
+      const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+      let theme = stored || (prefersDark ? 'night' : 'day');
 
-      function resize() {
-        W = canvas.width = Math.floor(window.innerWidth * DPR);
-        H = canvas.height = Math.floor(window.innerHeight * DPR);
-        canvas.style.width = window.innerWidth + 'px';
-        canvas.style.height = window.innerHeight + 'px';
-        spawnStars();
-        placePlanets();
+      function apply(next){
+        root.setAttribute('data-theme', next);
+        const isDay = next === 'day';
+        btn.setAttribute('aria-pressed', String(isDay));
+        icon.textContent = isDay ? '☀️' : '🌙';
+        text.textContent = isDay ? 'Day' : 'Night';
+        localStorage.setItem(key, next);
+        window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: next }}));
       }
-      window.addEventListener('resize', resize, { passive: true });
+      apply(theme);
 
-      function rand(a,b){ return a + Math.random()*(b-a) }
+      btn.addEventListener('click', () => {
+        theme = (theme === 'day') ? 'night' : 'day';
+        apply(theme);
+      });
+    })();
 
-      function spawnStars() {
-        const count = Math.min(300, Math.max(120, Math.floor((W/DPR)*(H/DPR) * 0.00015)));
-        stars = Array.from({length:count}, () => ({
-          x: Math.random()*W,
-          y: Math.random()*H,
-          r: rand(0.4*DPR, 1.6*DPR),
-          a: rand(.3,.9),
-          t: rand(.002,.01)
-        }));
+    // Canvas Space/Day Scene with rockets
+    (function spaceScene(){
+      const canvas = document.getElementById('space-canvas');
+      const ctx = canvas.getContext('2d');
+      let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      let W = 0, H = 0;
+
+      const reduceMotionMQ = matchMedia('(prefers-reduced-motion: reduce)');
+      let animationsEnabled = !reduceMotionMQ.matches;
+
+      const state = {
+        stars: [],
+        planets: [],
+        orbiters: [],
+        rockets: [],
+        particles: [],
+        clouds: [],
+        lastSpawn: 0,
+        spawnInterval: 3500 + Math.random() * 2500,
+        theme: document.documentElement.getAttribute('data-theme') || 'night',
+        t: 0
+      };
+
+      function resize(){
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        W = w; H = h;
+        // Rebuild background features with density based on area
+        buildBackground();
       }
 
-      function placePlanets(){
-        planets = [
-          { x: W*0.22, y: H*0.30, r: 60*DPR, hue: 210, ring:false },
-          { x: W*0.78, y: H*0.52, r: 86*DPR, hue: 270, ring:true },
-          { x: W*0.50, y: H*0.80, r: 52*DPR, hue: 35, ring:false }
-        ];
-        // Ensure at least one orbit rocket per planet
-        if (rockets.length === 0) {
-          for (let i=0;i<2;i++) {
-            rockets.push(makeOrbitRocket(i===0?1:0));
+      function rand(a,b){ return a + Math.random()*(b-a); }
+
+      function buildBackground(){
+        // Stars
+        const starTarget = state.theme === 'day' ? Math.floor((W*H)/90000) : Math.floor((W*H)/2500);
+        state.stars.length = 0;
+        for (let i=0;i<starTarget;i++){
+          state.stars.push({
+            x: Math.random()*W,
+            y: Math.random()*H,
+            r: Math.random()*1.2 + 0.3,
+            a: Math.random()*0.8 + 0.2,
+            tw: Math.random()*0.6 + 0.2,
+          });
+        }
+        // Planets (night) or Sun (day)
+        state.planets.length = 0;
+        if (state.theme === 'night') {
+          state.planets.push({ // ringed planet left
+            x: W*0.18, y: H*0.32, r: Math.min(W,H)*0.10, hue: 260, ring: true
+          });
+          state.planets.push({ // big planet right
+            x: W*0.80, y: H*0.24, r: Math.min(W,H)*0.16, hue: 200, ring: false
+          });
+        } else {
+          state.planets.push({ // sun
+            x: W*0.82, y: H*0.18, r: Math.min(W,H)*0.18, hue: 45, sun: true
+          });
+        }
+
+        // Orbiters around first body if night; around "sun" we skip rings but can orbit a satellite silhouette
+        state.orbiters.length = 0;
+        if (state.theme === 'night') {
+          const targets = state.planets;
+          targets.forEach((p, idx)=>{
+            const count = idx === 0 ? 1 : 2;
+            for (let i=0;i<count;i++){
+              state.orbiters.push({
+                cx: p.x, cy: p.y,
+                R: p.r * (1.9 + i*0.45 + Math.random()*0.3),
+                a: Math.random() * Math.PI*2,
+                w: (idx===0?0.35:0.24) * (Math.random()<0.5?-1:1),
+                size: 8 + Math.random()*10
+              });
+            }
+          });
+        } else {
+          // Day: a satellite orbiting the "sun" silhouette for subtle motion
+          const s = state.planets[0];
+          state.orbiters.push({
+            cx: s.x, cy: s.y,
+            R: s.r * 1.9,
+            a: Math.random()*Math.PI*2,
+            w: 0.18,
+            size: 7
+          });
+          // Clouds
+          state.clouds.length = 0;
+          const cloudCount = Math.max(6, Math.floor(W/220));
+          for (let i=0;i<cloudCount;i++){
+            state.clouds.push({
+              x: Math.random()*W,
+              y: rand(H*0.08, H*0.6),
+              v: rand(10, 28),
+              w: rand(90, 220),
+              h: rand(18, 36),
+              puff: 3 + Math.floor(Math.random()*3)
+            });
           }
         }
       }
 
-      function drawStars(dt){
-        for(const s of stars){
-          s.a += s.t * (Math.random()>.5 ? 1 : -1) * dt;
-          if (s.a>1) s.a=1; if (s.a<.25) s.a=.25;
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-          ctx.fillStyle = `rgba(255,255,255,${s.a})`;
-          ctx.fill();
+      function drawBackground(){
+        // Gradient sky
+        if (state.theme === 'night') {
+          const g = ctx.createLinearGradient(0,0,0,H);
+          g.addColorStop(0, '#0b1020');
+          g.addColorStop(1, '#0f1a3a');
+          ctx.fillStyle = g;
+          ctx.fillRect(0,0,W,H);
+        } else {
+          const g = ctx.createLinearGradient(0,0,0,H);
+          g.addColorStop(0, '#bfe0ff');
+          g.addColorStop(1, '#8dbbff');
+          ctx.fillStyle = g;
+          ctx.fillRect(0,0,W,H);
         }
-      }
 
-      function drawPlanets(){
-        for(const p of planets){
-          const grad = ctx.createRadialGradient(p.x - p.r*0.3, p.y - p.r*0.3, p.r*0.2, p.x, p.y, p.r*1.2);
-          grad.addColorStop(0, `hsla(${p.hue}, 80%, 70%, .95)`);
-          grad.addColorStop(0.5, `hsla(${p.hue}, 70%, 50%, .9)`);
-          grad.addColorStop(1, `hsla(${p.hue}, 90%, 25%, .8)`);
+        // Stars or subtle speckles
+        if (state.stars.length){
           ctx.save();
-          ctx.shadowColor = `hsla(${p.hue}, 100%, 70%, .4)`;
-          ctx.shadowBlur = 40*DPR;
-          ctx.beginPath();
-          ctx.fillStyle = grad;
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-          ctx.fill();
-          ctx.restore();
-
-          if (p.ring){
-            ctx.save();
-            ctx.translate(p.x, p.y);
-            ctx.rotate(-0.5);
-            ctx.scale(1.8, 0.6);
+          for (const s of state.stars){
+            const twinkle = state.theme === 'night' ? (Math.sin(state.t * s.tw + s.x) * 0.4 + 0.6) : 0.15;
+            ctx.globalAlpha = s.a * twinkle;
+            ctx.fillStyle = state.theme === 'night' ? '#e8ecff' : '#ffffff';
             ctx.beginPath();
-            ctx.lineWidth = 6*DPR;
-            const ringGrad = ctx.createLinearGradient(-p.r*1.6, 0, p.r*1.6, 0);
-            ringGrad.addColorStop(0, 'rgba(255,255,255,.0)');
-            ringGrad.addColorStop(0.4, 'rgba(173,216,230,.6)');
-            ringGrad.addColorStop(0.6, 'rgba(255,255,255,.8)');
-            ringGrad.addColorStop(1, 'rgba(255,255,255,.0)');
-            ctx.strokeStyle = ringGrad;
-            ctx.ellipse(0,0, p.r*1.4, p.r*1.4, 0, 0, Math.PI*2);
-            ctx.stroke();
-            ctx.restore();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+            ctx.fill();
           }
+          ctx.restore();
+        }
+
+        // Planets / Sun
+        for (const p of state.planets){
+          if (p.sun) {
+            // Sun with soft glow
+            const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*1.8);
+            glow.addColorStop(0, 'rgba(255,223,120,0.9)');
+            glow.addColorStop(1, 'rgba(255,223,120,0)');
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r*1.8, 0, Math.PI*2);
+            ctx.fill();
+
+            const body = ctx.createRadialGradient(p.x - p.r*0.3, p.y - p.r*0.3, p.r*0.2, p.x, p.y, p.r);
+            body.addColorStop(0, '#fff3b0');
+            body.addColorStop(1, '#f6c453');
+            ctx.fillStyle = body;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+            ctx.fill();
+          } else {
+            // Planet body
+            const body = ctx.createRadialGradient(p.x - p.r*0.4, p.y - p.r*0.4, p.r*0.2, p.x, p.y, p.r);
+            body.addColorStop(0, `hsl(${p.hue}, 90%, 75%)`);
+            body.addColorStop(1, `hsl(${p.hue}, 70%, 45%)`);
+            ctx.fillStyle = body;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+            ctx.fill();
+
+            if (p.ring) {
+              // Simple ring
+              ctx.save();
+              ctx.translate(p.x, p.y);
+              ctx.rotate(-0.35);
+              ctx.strokeStyle = 'rgba(200,220,255,0.55)';
+              ctx.lineWidth = Math.max(1.5, p.r*0.12);
+              ctx.beginPath();
+              ctx.ellipse(0, 0, p.r*1.6, p.r*0.6, 0, 0, Math.PI*2);
+              ctx.stroke();
+              ctx.restore();
+            }
+          }
+        }
+
+        // Clouds in day
+        if (state.theme === 'day') {
+          ctx.save();
+          ctx.fillStyle = 'rgba(255,255,255,0.85)';
+          for (const c of state.clouds){
+            // Draw puffy cloud
+            ctx.beginPath();
+            const step = c.w / (c.puff+1);
+            for (let i=0;i<c.puff;i++){
+              const cx = c.x + i*step;
+              const cy = c.y + (i%2? -c.h*0.15 : 0);
+              ctx.moveTo(cx, cy);
+              ctx.arc(cx, cy, c.h*0.6, 0, Math.PI*2);
+            }
+            // base
+            ctx.roundRect(c.x - c.h*0.3, c.y, c.w + c.h*0.6, c.h*0.9, c.h*0.45);
+            ctx.fill();
+          }
+          ctx.restore();
         }
       }
 
-      function drawRocketShape(scale=1, color='#fff'){
-        // Rocket pointing -> +X axis
-        const s = scale;
-        ctx.beginPath(); // body
-        ctx.moveTo(0, -7*s);
-        ctx.lineTo(22*s, -7*s);
-        ctx.lineTo(22*s, 7*s);
-        ctx.lineTo(0, 7*s);
+      // Rocket rendering (simple vector)
+      function drawRocket(x, y, a, size, tint='auto'){
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(a);
+        ctx.scale(size, size);
+
+        // Body
+        ctx.fillStyle = state.theme === 'day' ? '#1f2937' : '#e5e7eb';
+        ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(0, -8); // nose
+        ctx.lineTo(4, 4);
+        ctx.lineTo(1.8, 4.2);
+        ctx.lineTo(0, 8);
+        ctx.lineTo(-1.8, 4.2);
+        ctx.lineTo(-4, 4);
         ctx.closePath();
-        ctx.fillStyle = '#e9f4ff';
         ctx.fill();
 
-        // nose
+        // Window
         ctx.beginPath();
-        ctx.moveTo(22*s, -7*s);
-        ctx.lineTo(32*s, 0);
-        ctx.lineTo(22*s, 7*s);
-        ctx.closePath();
-        ctx.fillStyle = color;
+        ctx.fillStyle = tint === 'auto' ? (state.theme === 'day' ? '#60a5fa' : '#93c5fd') : tint;
+        ctx.arc(0, -1.6, 1.6, 0, Math.PI*2);
         ctx.fill();
 
-        // fins
+        // Fins
+        ctx.fillStyle = tint === 'auto' ? (state.theme === 'day' ? '#fb923c' : '#a78bfa') : tint;
         ctx.beginPath();
-        ctx.moveTo(4*s, 7*s);
-        ctx.lineTo(-6*s, 12*s);
-        ctx.lineTo(0, 7*s);
+        ctx.moveTo(4, 4);
+        ctx.lineTo(6.2, 6.8);
+        ctx.lineTo(2.2, 5);
         ctx.closePath();
-        ctx.moveTo(4*s, -7*s);
-        ctx.lineTo(-6*s, -12*s);
-        ctx.lineTo(0, -7*s);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(-4, 4);
+        ctx.lineTo(-6.2, 6.8);
+        ctx.lineTo(-2.2, 5);
         ctx.closePath();
-        ctx.fillStyle = '#ff6b9e';
         ctx.fill();
 
-        // window
-        ctx.beginPath();
-        ctx.arc(10*s, 0, 3.2*s, 0, Math.PI*2);
-        ctx.fillStyle = '#7bdcff';
-        ctx.fill();
+        ctx.restore();
       }
 
-      function spawnExhaust(x,y,angle,speed){
-        for(let i=0;i<2;i++){
-          exhaust.push({
+      function spawnRocket(){
+        if (!animationsEnabled) return;
+        const x = rand(W*0.1, W*0.9);
+        const y = H + 20;
+        const vx = rand(-12, 12);
+        const vy = rand(-160, -120);
+        const rot = -Math.PI/2 + Math.atan2(vy, vx) * 0.12;
+        state.rockets.push({
+          x, y,
+          vx, vy,
+          ax: 0, ay: 20, // gravity-ish to curve trail
+          r: rot,
+          size: rand(0.7, 1.1),
+          life: 0,
+          maxLife: rand(4.5, 6.5)
+        });
+      }
+
+      function spawnParticles(x, y, count=8){
+        for (let i=0;i<count;i++){
+          state.particles.push({
             x, y,
-            vx: Math.cos(angle+Math.PI) * (speed*0.3) + rand(-0.3,0.3)*DPR,
-            vy: Math.sin(angle+Math.PI) * (speed*0.3) + rand(-0.3,0.3)*DPR,
-            life: rand(18,34),
-            r: rand(1.2*DPR, 2.2*DPR),
-            hue: rand(20,55)
+            vx: rand(-30, 30),
+            vy: rand(40, 100),
+            a: 1,
+            life: rand(0.2, 0.6),
+            size: rand(1.5, 3),
+            hue: state.theme === 'day' ? 40 + Math.random()*20 : 20 + Math.random()*10
           });
         }
       }
 
-      function drawExhaust(dt){
-        for(let i=exhaust.length-1;i>=0;i--){
-          const p = exhaust[i];
-          p.life -= dt;
-          p.x += p.vx * dt;
-          p.y += p.vy * dt;
-          if (p.life<=0){ exhaust.splice(i,1); continue; }
-          const alpha = Math.max(0, p.life/34);
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-          ctx.fillStyle = `hsla(${p.hue}, 100%, 65%, ${alpha})`;
-          ctx.fill();
-        }
-      }
+      function update(dt){
+        state.t += dt;
 
-      function makeOrbitRocket(planetIndex){
-        const p = planets[planetIndex] || {x:W*0.5,y:H*0.5,r:80*DPR};
-        return {
-          mode:'orbit',
-          planetIndex,
-          angle: Math.random()*Math.PI*2,
-          speed: rand(0.006, 0.012),
-          radius: p.r + rand(34*DPR, 64*DPR),
-          color: '#a5fffb',
-          scale: 1.2*DPR
-        };
-      }
-
-      function makeLaunchRocket(){
-        const tx = W*rand(0.15,0.85);
-        const col = Math.random()>.5 ? '#a5fffb' : '#ffd166';
-        return {
-          mode:'launch',
-          x: tx + rand(-40*DPR, 40*DPR),
-          y: H + 30*DPR,
-          vx: rand(-0.3*DPR, 0.3*DPR),
-          vy: -rand(2.2*DPR, 3.2*DPR),
-          thrust: rand(0.04*DPR, 0.08*DPR),
-          color: col,
-          scale: 1.1*DPR,
-          life: rand(260, 380)
-        };
-      }
-
-      function updateRocket(r, dt){
-        if (r.mode === 'orbit'){
-          const p = planets[r.planetIndex] || planets[0];
-          r.angle += r.speed * dt;
-          const x = p.x + Math.cos(r.angle) * r.radius;
-          const y = p.y + Math.sin(r.angle) * r.radius;
-          const tangent = r.angle + Math.PI/2;
-          drawRocket(x, y, tangent, r.scale, r.color, 0.9, true);
-          // faint orbit trail
-          ctx.save();
-          ctx.globalAlpha = .15;
-          ctx.beginPath();
-          ctx.strokeStyle = 'rgba(165,255,251,.25)';
-          ctx.lineWidth = 1*DPR;
-          ctx.arc(p.x, p.y, r.radius, 0, Math.PI*2);
-          ctx.stroke();
-          ctx.restore();
-        } else {
-          // Launch mode
-          r.life -= dt;
-          r.vy -= r.thrust * dt * 0.25; // accelerating upward
-          r.x += r.vx * dt;
-          r.y += r.vy * dt;
-          const angle = Math.atan2(r.vy, r.vx);
-          drawRocket(r.x, r.y, angle, r.scale, r.color, 1.0, false);
-          // Exhaust particles from back of rocket
-          const tailX = r.x - Math.cos(angle) * 12*DPR;
-          const tailY = r.y - Math.sin(angle) * 12*DPR;
-          spawnExhaust(tailX, tailY, angle, Math.hypot(r.vx, r.vy));
-          // If off screen or life ended, recycle
-          if (r.y < -50*DPR || r.life<=0){
-            const idx = rockets.indexOf(r);
-            if (idx>=0) rockets.splice(idx,1);
+        // Theme dependent updates
+        if (state.theme === 'day'){
+          // move clouds
+          for (const c of state.clouds){
+            c.x += c.v * dt;
+            if (c.x - c.w > W + 50) {
+              c.x = -c.w - 50;
+              c.y = rand(H*0.08, H*0.6);
+              c.v = rand(10, 28);
+            }
           }
         }
+
+        // orbiters
+        for (const o of state.orbiters){
+          o.a += o.w * dt * 0.5;
+        }
+
+        // periodic rocket spawns
+        if (state.t - state.lastSpawn > state.spawnInterval/1000) {
+          spawnRocket();
+          state.lastSpawn = state.t;
+          state.spawnInterval = 2800 + Math.random()*3500;
+        }
+
+        // rockets
+        const aliveRockets = [];
+        for (const r of state.rockets){
+          r.life += dt;
+          r.vx += r.ax * dt;
+          r.vy += r.ay * dt;
+          r.x += r.vx * dt;
+          r.y += r.vy * dt;
+          r.r = Math.atan2(r.vy, r.vx);
+          if (Math.random() < 0.9) spawnParticles(r.x - Math.cos(r.r)*6, r.y - Math.sin(r.r)*6, 2);
+          // keep if on screen and life not too long
+          if (r.y > -60 && r.life < r.maxLife) aliveRockets.push(r);
+        }
+        state.rockets = aliveRockets;
+
+        // particles
+        const aliveP = [];
+        for (const p of state.particles){
+          p.life -= dt;
+          p.x += p.vx * dt * 0.6;
+          p.y += p.vy * dt * 0.6;
+          p.a = Math.max(0, p.life * 1.6);
+          if (p.life > 0 && p.a > 0.02) aliveP.push(p);
+        }
+        state.particles = aliveP;
       }
 
-      function drawRocket(x, y, angle, scale, color, glow=1, drawFlame=false){
+      function render(){
+        drawBackground();
+
+        // orbiters
         ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(angle);
-        ctx.shadowColor = `rgba(93,214,255,${0.35*glow})`;
-        ctx.shadowBlur = 18*DPR*glow;
-        drawRocketShape(scale, color);
-        // stylized flame
-        if (drawFlame){
+        for (const o of state.orbiters){
+          const x = o.cx + Math.cos(o.a) * o.R;
+          const y = o.cy + Math.sin(o.a) * (state.theme === 'night' ? o.R*0.6 : o.R*0.5);
+          drawRocket(x, y, o.a + Math.PI/2, o.size/10);
+        }
+        ctx.restore();
+
+        // rocket exhaust particles
+        ctx.save();
+        for (const p of state.particles){
+          ctx.globalAlpha = p.a;
+          ctx.fillStyle = `hsl(${p.hue}, 90%, ${state.theme==='day'?55:60}%)`;
           ctx.beginPath();
-          ctx.moveTo(-6*scale, 0);
-          ctx.quadraticCurveTo(-18*scale, rand(-10,10)*scale, -30*scale, 0);
-          ctx.quadraticCurveTo(-18*scale, rand(-10,10)*scale, -6*scale, 0);
-          ctx.closePath();
-          const flameGrad = ctx.createRadialGradient(-16*scale, 0, 2*scale, -20*scale, 0, 14*scale);
-          flameGrad.addColorStop(0, 'rgba(255,255,255,.95)');
-          flameGrad.addColorStop(0.4, 'rgba(255,208,112,.9)');
-          flameGrad.addColorStop(1, 'rgba(255,109,120,.0)');
-          ctx.fillStyle = flameGrad;
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
           ctx.fill();
         }
         ctx.restore();
+
+        // rockets
+        for (const r of state.rockets){
+          drawRocket(r.x, r.y, r.r + Math.PI/2, r.size);
+        }
       }
 
-      function loop(now){
-        const dt = Math.max(0.5, Math.min(3.0, (now - last) / 16.67));
+      let last = performance.now();
+      function frame(now){
+        const dt = Math.min(0.05, (now - last) / 1000);
         last = now;
 
-        ctx.clearRect(0,0,W,H);
-        drawStars(dt);
-        drawPlanets();
-
-        // Ensure a few launch rockets concurrently
-        if (!prefersReduced && rockets.filter(r=>r.mode==='launch').length < 2 && Math.random()<0.04){
-          rockets.push(makeLaunchRocket());
-        }
-
-        // Update rockets
-        for(const r of rockets.slice()){
-          updateRocket(r, dt);
-        }
-
-        // Exhaust after rockets
-        drawExhaust(dt);
-
-        requestAnimationFrame(loop);
-      }
-
-      // Boot
-      function init(){
-        resize();
-        if (!prefersReduced){
-          rockets.push(makeOrbitRocket(1));
-          rockets.push(makeOrbitRocket(0));
-          rockets.push(makeLaunchRocket());
-          requestAnimationFrame(loop);
+        if (animationsEnabled){
+          update(dt);
+          render();
+          requestAnimationFrame(frame);
+        } else {
+          // Render a static scene if reduced motion
+          render();
         }
       }
-      init();
 
-      // Interactions
-      document.getElementById('launchBtn').addEventListener('click', () => {
-        if (prefersReduced) return;
-        rockets.push(makeLaunchRocket());
-      });
-      window.addEventListener('keydown', e => {
-        if ((e.key === 'l' || e.key === 'L') && !prefersReduced){
-          rockets.push(makeLaunchRocket());
+      // Setup
+      resize();
+      // initial ambient rockets to show motion quickly
+      for (let i=0;i<2;i++) spawnRocket();
+
+      // Events
+      window.addEventListener('resize', resize);
+      reduceMotionMQ.addEventListener?.('change', (e)=>{
+        animationsEnabled = !e.matches;
+        // restart loop if toggled back on
+        if (animationsEnabled) {
+          last = performance.now();
+          requestAnimationFrame(frame);
+        } else {
+          render();
         }
       });
+
+      window.addEventListener('themechange', (e)=>{
+        state.theme = e.detail.theme;
+        buildBackground();
+        // Re-render promptly
+        if (!animationsEnabled) render();
+      });
+
+      // Controls
+      const launch = ()=> spawnRocket();
+      document.getElementById('launchBtn').addEventListener('click', launch);
+      document.getElementById('launchBtn2').addEventListener('click', launch);
+      window.addEventListener('keydown', (e)=>{
+        if (e.key.toLowerCase() === 'l') launch();
+      });
+
+      // Start animation
+      requestAnimationFrame(frame);
     })();
 
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Simple contact form demo
+    document.getElementById('contactForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = new FormData(e.target);
+      alert(`Thanks, ${data.get('name')}! Your message was queued for launch.\n\nEmail: ${data.get('email')}\nMessage: ${data.get('message')}`);
+      e.target.reset();
+    });
   </script>
+  <!--
+    MIT License
+
+    Copyright (c) 2025 Hritik Sharma
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+  -->
 </body>
 </html>
